@@ -48,10 +48,10 @@ class PackageServiceOptions implements NodeInterface
     private $deliveryConfirmation;
 
     /**
-     * @var ShipperReleaseIndicator
+     * @var boolean
      */
-    private $ShipperReleaseIndicator;
-
+    private $shipperReleaseIndicator;
+    
     /**
      * @param null $parameters
      */
@@ -72,9 +72,6 @@ class PackageServiceOptions implements NodeInterface
             }
             if (isset($parameters->DeliveryConfirmation)) {
                 $this->setDeliveryConfirmation($parameters->DeliveryConfirmation);
-            }
-            if (isset($parameters->ShipperReleaseIndicator)) {
-                $this->ShipperReleaseIndicator = $parameters->ShipperReleaseIndicator;
             }
         }
     }
@@ -105,9 +102,6 @@ class PackageServiceOptions implements NodeInterface
         }
         if (isset($this->deliveryConfirmation)) {
             $node->appendChild($this->deliveryConfirmation->toNode($document));
-        }
-        if (isset($this->ShipperReleaseIndicator)) {
-            $node->appendChild($document->createElement('ShipperReleaseIndicator'));
         }
 
         return $node;
@@ -234,22 +228,21 @@ class PackageServiceOptions implements NodeInterface
     {
         return $this->deliveryConfirmation;
     }
-
+    
     /**
-     * @return mixed
+     * 
+     * @return boolean
      */
     public function getShipperReleaseIndicator()
     {
-        return $this->ShipperReleaseIndicator;
+        return $this->shipperReleaseIndicator;
     }
-
+    
     /**
-     * @param mixed $ShipperReleaseIndicator
-     * @return ShipmentServiceOptions
+     * @param boolean $shipperReleaseIndicator
      */
-    public function setShipperReleaseIndicator($ShipperReleaseIndicator)
+    public function setShipperReleaseIndicator($shipperReleaseIndicator)
     {
-        $this->ShipperReleaseIndicator = $ShipperReleaseIndicator;
-        return $this;
+        $this->shipperReleaseIndicator = $shipperReleaseIndicator;
     }
 }
